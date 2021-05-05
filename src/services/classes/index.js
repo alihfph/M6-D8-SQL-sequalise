@@ -10,7 +10,7 @@ router
   .get(async (req, res, next) => {
     try {
       const data = await Class.findAll(
-        { include: Tutor },
+        // { include: Tutor },
         { include: Student }
       );
       res.send(data);

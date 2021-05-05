@@ -1,5 +1,6 @@
 const express = require("express");
 const Tutor = require("../../db").Tutor;
+const Student = require("../../db").Student;
 const Class = require("../../db").Class;
 const { Op, Sequelize } = require("sequelize");
 const router = express.Router();
@@ -7,7 +8,12 @@ const router = express.Router();
 router
   .route("/")
   .get(async (req, res, next) => {
-    const data = await Tutor.findAll({ include: Class });
+    const data = await Tutor.findAll({
+      include: {
+        model: Class,
+        include: { model: Student },
+      },
+    });
     res.send(data);
     try {
     } catch (e) {
