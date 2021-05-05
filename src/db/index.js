@@ -17,6 +17,9 @@ Student.hasOne(Address);
 Address.belongsTo(Student);
 Class.belongsToMany(Student, { through: "StudentClass", timestamps: false });
 Student.belongsToMany(Class, { through: "StudentClass", timestamps: false });
+Tutor.belongsToMany(Class, { through: "TutorClass", timestamps: false });
+Class.belongsToMany(Tutor, { through: "TutorClass", timestamps: false });
+
 sequelize
   .authenticate()
   .then(() => console.log("Connection established"))

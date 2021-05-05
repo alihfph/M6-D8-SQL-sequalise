@@ -1,10 +1,13 @@
 const express = require("express");
 const Student = require("../../db").Student;
+const Class = require("../../db").Class;
 const router = express.Router();
 
 router
   .route("/")
   .get(async (req, res, next) => {
+    const data = await Student.findAll({ include: Class });
+    res.send(data);
     try {
     } catch (e) {
       console.log(e);
@@ -12,10 +15,7 @@ router
   })
   .post(async (req, res, next) => {
     try {
-      const data = await Student.bulkCreate([
-        { name: "Gentrit", lastname: "Begaj" },
-        { name: "Luca", lastname: "Perullo" },
-      ]);
+      const data = await Student.create(req.body);
       res.send(data);
     } catch (e) {
       console.log(e);
