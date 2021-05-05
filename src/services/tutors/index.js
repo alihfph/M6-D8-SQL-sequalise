@@ -69,7 +69,6 @@ router
   .get(async (req, res, next) => {
     const data = await Tutor.findByPk(req.params.id, {
       include: Class,
-      include: Student,
     });
     res.send(data);
     try {
