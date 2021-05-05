@@ -33,23 +33,11 @@ router
             classes: Sequelize.where(Sequelize.col(`"classes".topic`), {
               [Op.iLike]: "%" + req.query.className + "%",
             }),
-            // {
-            //   where: {
-            //     "classes.topic": {
-            //       [Op.iLike]: "%" + req.query.className + "%",
-            //     },
-            //   },
-            // },
           },
         ],
       },
       include: {
         model: Class,
-        // where: {
-        //   [Op.or]: [
-        //     { topic: { [Op.iLike]: "%" + req.query.className + "%" } },
-        //   ],
-        // },
         include: { model: Tutor, through: { attributes: [] } },
       },
     });
